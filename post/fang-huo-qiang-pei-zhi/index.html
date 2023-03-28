@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>防火墙配置 | Iamsssb</title>
+<meta name="description" content="Iamsssb">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://github.com/leonwong1909/grblog/favicon.ico?v=1679979172415">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://github.com/leonwong1909/grblog/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://github.com/leonwong1909/grblog">
+        <img class="avatar" src="https://github.com/leonwong1909/grblog/images/avatar.png?v=1679979172415" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://github.com/leonwong1909/grblog">
+        <h1 class="site-title">Iamsssb</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="/" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="menu purple-link">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">防火墙配置</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2023-03-28</span>
+            
+          </div>
+          <div class="post-content">
+            <h2 id="防火墙基本配置">防火墙基本配置</h2>
+<h3 id="查看防火墙版本">查看防火墙版本</h3>
+<pre><code>firewall-cmd --version
+</code></pre>
+<h3 id="启动">启动</h3>
+<pre><code>systemctl start firewalld
+</code></pre>
+<h3 id="关闭">关闭</h3>
+<pre><code>systemctl stop firewalld
+</code></pre>
+<h3 id="重启">重启</h3>
+<pre><code>systemctl restart firewalld
+</code></pre>
+<h3 id="状态">状态</h3>
+<pre><code>systemctl status firewalld
+</code></pre>
+<h3 id="查看当前规则">查看当前规则</h3>
+<pre><code>firewall-cmd --list-all
+</code></pre>
+<h3 id="查看开放的端口">查看开放的端口</h3>
+<pre><code>firewall-cmd --list-port
+</code></pre>
+<h3 id="查看开放的端口-2">查看开放的端口</h3>
+<pre><code>firewall-cmd --zone=public --list-ports
+</code></pre>
+<h2 id="添加白名单与端口">添加白名单与端口</h2>
+<h3 id="添加白名单">添加白名单</h3>
+<pre><code class="language-shell">firewall-cmd --permanent --add-rich-rule 'rule family=ipv4 source address=19.105.194.151 port port=1521 protocol=tcp accept'
+</code></pre>
+<h3 id="移除规则">移除规则</h3>
+<pre><code class="language-shell">firewall-cmd --permanent --remove-rich-rule='rule family=&quot;ipv4&quot; source address=&quot;192.168.1.1&quot; port protocol=&quot;tcp&quot; port=&quot;8080&quot; accept'
+</code></pre>
+<h3 id="添加黑名单">添加黑名单</h3>
+<pre><code class="language-shell">firewall-cmd --permanent --add-rich-rule='rule family=&quot;ipv4&quot; source address=&quot;192.168.1.1&quot; port protocol=&quot;tcp&quot; port=&quot;8080&quot; reject'
+</code></pre>
+<h2 id="根据服务开放">根据服务开放</h2>
+<pre><code class="language-shell">firewall-cmd --permanent --add-service=http
+</code></pre>
+<h2 id="测试工具traceroute">测试工具traceroute</h2>
+<pre><code class="language-sql">traceroute www.badu.com
+traceroute -d IP
+</code></pre>
+<h2 id="放开端口">放开端口</h2>
+<pre><code class="language-shell">firewall-cmd --zone=public --add-port=22/tcp --permanent
+</code></pre>
+<h2 id="移除端口">移除端口</h2>
+<pre><code class="language-bash">firewall-cmd --zone=public --remove-port=80/tcp --permanent
+</code></pre>
+<h2 id="重新加载">重新加载</h2>
+<pre><code class="language-shell">firewall-cmd --reload
+</code></pre>
+
+          </div>
+        </div>
+
+        
+      </div>
+
+      
+
+      <div class="site-footer">
+  <div class="slogan">Iamsssb</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://github.com/leonwong1909/grblog/atom.xml" target="_blank">RSS</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>

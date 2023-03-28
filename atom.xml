@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://github.com/leonwong1909/grblog</id>
+    <title>Iamsssb</title>
+    <updated>2023-03-28T04:52:55.146Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://github.com/leonwong1909/grblog"/>
+    <link rel="self" href="https://github.com/leonwong1909/grblog/atom.xml"/>
+    <subtitle>Iamsssb</subtitle>
+    <logo>https://github.com/leonwong1909/grblog/images/avatar.png</logo>
+    <icon>https://github.com/leonwong1909/grblog/favicon.ico</icon>
+    <rights>All rights reserved 2023, Iamsssb</rights>
+    <entry>
+        <title type="html"><![CDATA[防火墙配置]]></title>
+        <id>https://github.com/leonwong1909/grblog/post/fang-huo-qiang-pei-zhi/</id>
+        <link href="https://github.com/leonwong1909/grblog/post/fang-huo-qiang-pei-zhi/">
+        </link>
+        <updated>2023-03-28T04:50:52.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="防火墙基本配置">防火墙基本配置</h2>
+<h3 id="查看防火墙版本">查看防火墙版本</h3>
+<pre><code>firewall-cmd --version
+</code></pre>
+<h3 id="启动">启动</h3>
+<pre><code>systemctl start firewalld
+</code></pre>
+<h3 id="关闭">关闭</h3>
+<pre><code>systemctl stop firewalld
+</code></pre>
+<h3 id="重启">重启</h3>
+<pre><code>systemctl restart firewalld
+</code></pre>
+<h3 id="状态">状态</h3>
+<pre><code>systemctl status firewalld
+</code></pre>
+<h3 id="查看当前规则">查看当前规则</h3>
+<pre><code>firewall-cmd --list-all
+</code></pre>
+<h3 id="查看开放的端口">查看开放的端口</h3>
+<pre><code>firewall-cmd --list-port
+</code></pre>
+<h3 id="查看开放的端口-2">查看开放的端口</h3>
+<pre><code>firewall-cmd --zone=public --list-ports
+</code></pre>
+<h2 id="添加白名单与端口">添加白名单与端口</h2>
+<h3 id="添加白名单">添加白名单</h3>
+<pre><code class="language-shell">firewall-cmd --permanent --add-rich-rule 'rule family=ipv4 source address=19.105.194.151 port port=1521 protocol=tcp accept'
+</code></pre>
+<h3 id="移除规则">移除规则</h3>
+<pre><code class="language-shell">firewall-cmd --permanent --remove-rich-rule='rule family=&quot;ipv4&quot; source address=&quot;192.168.1.1&quot; port protocol=&quot;tcp&quot; port=&quot;8080&quot; accept'
+</code></pre>
+<h3 id="添加黑名单">添加黑名单</h3>
+<pre><code class="language-shell">firewall-cmd --permanent --add-rich-rule='rule family=&quot;ipv4&quot; source address=&quot;192.168.1.1&quot; port protocol=&quot;tcp&quot; port=&quot;8080&quot; reject'
+</code></pre>
+<h2 id="根据服务开放">根据服务开放</h2>
+<pre><code class="language-shell">firewall-cmd --permanent --add-service=http
+</code></pre>
+<h2 id="测试工具traceroute">测试工具traceroute</h2>
+<pre><code class="language-sql">traceroute www.badu.com
+traceroute -d IP
+</code></pre>
+<h2 id="放开端口">放开端口</h2>
+<pre><code class="language-shell">firewall-cmd --zone=public --add-port=22/tcp --permanent
+</code></pre>
+<h2 id="移除端口">移除端口</h2>
+<pre><code class="language-bash">firewall-cmd --zone=public --remove-port=80/tcp --permanent
+</code></pre>
+<h2 id="重新加载">重新加载</h2>
+<pre><code class="language-shell">firewall-cmd --reload
+</code></pre>
+]]></content>
+    </entry>
+</feed>
