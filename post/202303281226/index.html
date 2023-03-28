@@ -1,10 +1,11 @@
 
+<!DOCTYPE html>
 <html>
   <head>
     
 <meta charset="utf-8" >
 
-<title>Iamsssb</title>
+<title>防火墙配置 | Iamsssb</title>
 <meta name="description" content="Iamsssb">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -77,74 +78,73 @@
 
 
       <div class="content-container">
-        
-        
-<section class="post-item">
-    <div class="content">
-      <a href="https://github.com/leonwong1909/grblog/post/ce-shi/">
-        <h2 class="post-title">测试</h2>
-      </a>
-      <div class="post-abstract">
-        
-      </div>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2023-03-28</span>
-        
-          <span>
-            <i class="icon icon-pricetags-outline"></i>
+        <div class="post-detail">
+          
+          <h2 class="post-title">防火墙配置</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2023-03-28</span>
             
-              <a href="https://github.com/leonwong1909/grblog/tag/linux/">
-                linux
-                
-              </a>
-            
-          </span>
+          </div>
+          <div class="post-content">
+            <h2 id="防火墙基本配置">防火墙基本配置</h2>
+<h3 id="查看防火墙版本">查看防火墙版本</h3>
+<pre><code>firewall-cmd --version
+</code></pre>
+<h3 id="启动">启动</h3>
+<pre><code>systemctl start firewalld
+</code></pre>
+<h3 id="关闭">关闭</h3>
+<pre><code>systemctl stop firewalld
+</code></pre>
+<h3 id="重启">重启</h3>
+<pre><code>systemctl restart firewalld
+</code></pre>
+<h3 id="状态">状态</h3>
+<pre><code>systemctl status firewalld
+</code></pre>
+<h3 id="查看当前规则">查看当前规则</h3>
+<pre><code>firewall-cmd --list-all
+</code></pre>
+<h3 id="查看开放的端口">查看开放的端口</h3>
+<pre><code>firewall-cmd --list-port
+</code></pre>
+<h3 id="查看开放的端口-2">查看开放的端口</h3>
+<pre><code>firewall-cmd --zone=public --list-ports
+</code></pre>
+<h2 id="添加白名单与端口">添加白名单与端口</h2>
+<h3 id="添加白名单">添加白名单</h3>
+<pre><code class="language-shell">firewall-cmd --permanent --add-rich-rule 'rule family=ipv4 source address=19.105.194.151 port port=1521 protocol=tcp accept'
+</code></pre>
+<h3 id="移除规则">移除规则</h3>
+<pre><code class="language-shell">firewall-cmd --permanent --remove-rich-rule='rule family=&quot;ipv4&quot; source address=&quot;192.168.1.1&quot; port protocol=&quot;tcp&quot; port=&quot;8080&quot; accept'
+</code></pre>
+<h3 id="添加黑名单">添加黑名单</h3>
+<pre><code class="language-shell">firewall-cmd --permanent --add-rich-rule='rule family=&quot;ipv4&quot; source address=&quot;192.168.1.1&quot; port protocol=&quot;tcp&quot; port=&quot;8080&quot; reject'
+</code></pre>
+<h2 id="根据服务开放">根据服务开放</h2>
+<pre><code class="language-shell">firewall-cmd --permanent --add-service=http
+</code></pre>
+<h2 id="测试工具traceroute">测试工具traceroute</h2>
+<pre><code class="language-sql">traceroute www.badu.com
+traceroute -d IP
+</code></pre>
+<h2 id="放开端口">放开端口</h2>
+<pre><code class="language-shell">firewall-cmd --zone=public --add-port=22/tcp --permanent
+</code></pre>
+<h2 id="移除端口">移除端口</h2>
+<pre><code class="language-bash">firewall-cmd --zone=public --remove-port=80/tcp --permanent
+</code></pre>
+<h2 id="重新加载">重新加载</h2>
+<pre><code class="language-shell">firewall-cmd --reload
+</code></pre>
+
+          </div>
+        </div>
+
         
       </div>
-    </div>
-    
-  </section>
 
-<section class="post-item">
-    <div class="content">
-      <a href="https://github.com/leonwong1909/grblog/post/202303281257/">
-        <h2 class="post-title">nginx配置记录</h2>
-      </a>
-      <div class="post-abstract">
-        
-      </div>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2023-03-28</span>
-        
-      </div>
-    </div>
-    
-  </section>
-
-<section class="post-item">
-    <div class="content">
-      <a href="https://github.com/leonwong1909/grblog/post/202303281226/">
-        <h2 class="post-title">防火墙配置</h2>
-      </a>
-      <div class="post-abstract">
-        
-      </div>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2023-03-28</span>
-        
-      </div>
-    </div>
-    
-  </section>
-
-
-<div class="pagination-container">
-  
-  
-</div>
-
-
-      </div>
+      
 
       <div class="site-footer">
   <div class="slogan">Iamsssb</div>
